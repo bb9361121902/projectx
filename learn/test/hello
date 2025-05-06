@@ -1,0 +1,55 @@
+<?php
+session_start();
+require_once "../php/db_conn.php"; // Ensure this is your correct DB connection file
+
+// Fetch bus details
+$busQuery = "SELECT * FROM BusSchedule";
+$result = $conn->query($busQuery);
+
+$buses = [];
+while ($row = $result->fetch_assoc()) {
+    $buses[] = $row;
+}
+
+// Store the bus data in session for reuse
+$_SESSION["buses"] = $buses;
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Details</title>
+    <link rel="stylesheet" href="../css/bus_details.css">
+</head>
+<body>
+    <h1 style="text-align: center; margin-top: 20px">Bus Details</h1>
+    <a class="bcbtn1" href="../html/index.html">Back to Home</a>
+
+    <div id="resultsContainer" class="results-container">
+        <?php
+        if (empty($_SESSION["buses"])) {
+            echo "<div class='card'>";
+            echo "<p style='color:red; text-align:center;'>No buses available for this route.</p>";
+            echo "</div>";
+        } else {
+            foreach ($_SESSION["buses"] as $bus) {
+                // Check if the bus ID is set before using it
+                if (!isset($bus["id"])) {
+                    echo "<div class='card'><p style='color:red; text-align:center;'>Bus data is incomplete.</p></div>";
+                    continue;
+                }
+
+                echo "<div class='card'>";
+                echo "<h2>🚍 " . htmlspecialchars($bus["busName"]) . "</h2>";
+                echo "<p>📍 <b>Route:</b> " . htmlspecialchars($bus["route"]) . "</p>";
+                echo "<p>⏰ <b>Time:</b> <span class='time'>" . htmlspecialchars($bus["time"]) . "</span></p>";
+                echo "<a href='../php/route.php?bus_id=" . urlencode($bus["id"]) . "' class='btn'>View Details</a>";
+                echo "</div>";
+            }
+        }
+        ?>
+    </div>
+</body>
+</html>

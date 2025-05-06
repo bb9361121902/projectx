@@ -1,0 +1,185 @@
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  background: url(../img/gps_bg-img.jpg) no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Black Glassmorphism Effect */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Dark transparent overlay */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  z-index: -1;
+}
+
+/* Heading */
+h1 {
+  font-size: 34px;
+  color: #1abc9c;
+  margin: 10px 0;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+}
+
+/* Primary Button */
+.bcbtn1 {
+  background: linear-gradient(45deg, #1abc9c, #16a085);
+  color: white;
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-left: -65rem;
+}
+
+.bcbtn1:hover {
+  background: linear-gradient(45deg, #16a085, #1abc9c);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Results Container (Fixed Size + Scroll) */
+.results-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 15px;
+  width: 80%;
+  max-width: 1200px;
+  height: 400px; /* Fixed height */
+  overflow-y: auto; /* Enable vertical scroll if content overflows */
+  background: rgba(255, 255, 255, 0.1); /* Light transparency */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  scrollbar-width: thin;
+  scrollbar-color: #1abc9c transparent;
+  margin-top: 20px;
+}
+
+/* Custom Scrollbar */
+.results-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.results-container::-webkit-scrollbar-thumb {
+  background: #1abc9c;
+  border-radius: 5px;
+}
+
+/* Card Styles (Fixed Size) */
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  width: 300px; /* Fixed width */
+  height: 180px; /* Fixed height */
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  border: 2px solid #1abc9c;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Card Heading */
+.card h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #1abc9c;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Card Route */
+.card p {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #444;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Card Timing */
+.card .time {
+  font-size: 14px;
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+/* Action Button */
+.btn {
+  display: inline-block;
+  background: #1abc9c;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  background: #16a085;
+  transform: scale(1.05);
+}
+
+/* Error Message */
+.error {
+  text-align: center;
+  font-size: 18px;
+  color: red;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .results-container {
+    width: 90%;
+    height: 300px;
+  }
+
+  .card {
+    width: 100%;
+    height: auto;
+  }
+
+  .bcbtn1 {
+    font-size: 16px;
+    padding: 10px 20px;
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+  }
+}

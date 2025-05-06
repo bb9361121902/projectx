@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Location Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Location Checker</h1>
+  <p>Click the button to check if your current location matches the stored coordinates.</p>
+  <button onclick="getLocation()">Check Location</button>
+
+  <script>
+    // Stored latitude and longitude (replace with your desired coordinates)
+    const storedLat = 11.0420173; 
+    const storedLong = 76.97586974; 
+//  8.7150140,77.388627
+    // Tolerance for matching (in degrees)
+    const tolerance = 0.01; // Adjust this value as needed
+
+    // Function to get the user's current location
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(compareLocation, showError);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+
+    // Function to compare the current location with the stored location
+    function compareLocation(position) {
+      const currentLat = position.coords.latitude;
+      const currentLong = position.coords.longitude;
+    //   console.log(`Current location: ${currentLat}, ${currentLong}`);
+
+      // Check if the current location is within the tolerance range of the stored location
+      if (
+        Math.abs(currentLat - storedLat) <= tolerance &&
+        Math.abs(currentLong - storedLong) <= tolerance
+      ) {
+        alert("You are at the stored location!");
+      } else {
+        alert("You are NOT at the stored location.");
+      }
+    }
+
+    // Function to handle errors
+    function showError(error) {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          alert("User denied the request for Geolocation.");
+          break;
+        case error.POSITION_UNAVAILABLE:
+          alert("Location information is unavailable.");
+          break;
+        case error.TIMEOUT:
+          alert("The request to get user location timed out.");
+          break;
+        case error.UNKNOWN_ERROR:
+          alert("An unknown error occurred.");
+          break;
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+D:\xampp\htdocs\learn\html\demo.html

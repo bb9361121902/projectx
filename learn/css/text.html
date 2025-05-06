@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login / Register Modal</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #f4f4f4;
+        font-family: Arial, sans-serif;
+      }
+
+      nav {
+        background: #333;
+        padding: 1rem;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      nav .btn {
+        background: #f0a500;
+        color: #333;
+        padding: 0.5rem 1rem;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: transform 0.2s;
+      }
+
+      nav .btn:hover {
+        transform: scale(1.05);
+      }
+
+      .modal-content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 340px;
+        height: 350px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        display: none;
+        z-index: 1000;
+      }
+
+      .modal-inner {
+        width: 680px;
+        height: 100%;
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .form-container {
+        width: 340px;
+        padding: 2rem 1.5rem;
+        flex-shrink: 0;
+      }
+
+      .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #333;
+        z-index: 10;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      input[type="email"],
+      input[type="password"],
+      input[type="text"] {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .btn {
+        padding: 0.5rem;
+        background: #f0a500;
+        color: #333;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s;
+        border-radius: 4px;
+      }
+
+      .btn:hover {
+        transform: scale(1.05);
+      }
+
+      .extra-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.85rem;
+      }
+
+      .extra-options label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+      }
+
+      .extra-options a {
+        text-decoration: none;
+        color: #f0a500;
+        font-weight: 500;
+      }
+
+      .terms {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.85rem;
+      }
+
+      .terms a {
+        color: #f0a500;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .switch-form {
+        font-size: 16px;
+        margin-top: 0.5rem;
+        cursor: pointer;
+        color: #f0a500;
+        text-decoration: underline;
+        font-weight: 500;
+      }
+      .modal-content.register-active .modal-inner {
+        transform: translateX(-340px);
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <button id="openModal" class="btn">Login</button>
+    </nav>
+
+    <div class="modal-content" id="modal">
+      <span class="close" id="closeModal">&times;</span>
+      <div class="modal-inner" id="modalInner">
+        <!-- Login Form -->
+        <div class="form-container">
+          <form id="loginForm">
+            <h3>Login</h3>
+            <input type="email" id="loginEmail" placeholder="Email" required />
+            <input type="password" id="loginPassword" placeholder="Password" required />
+            <div class="extra-options">
+              <label><input type="checkbox" id="remember" /> Remember Me</label>
+              <a href="#">Forgot Password?</a>
+            </div>
+            <button class="btn" type="submit">Login</button>
+            <p>
+              Don't have an account?
+              <a class="switch-form" id="switchToRegister"> Sign up</a>
+            </p>
+          </form>
+        </div>
+
+        <!-- Register Form -->
+        <div class="form-container">
+          <form id="registerForm">
+            <h3>Register</h3>
+            <input type="text" id="registerName" placeholder="Full Name" required />
+            <input type="email" id="registerEmail" placeholder="Email" required />
+            <input
+              type="password"
+              id="registerPassword"
+              placeholder="Password"
+              required
+
+              
+            />
+            <div class="terms">
+              <input type="checkbox" id="agree" />
+              <label for="agree"
+                >I agree to the <a href="#">Terms & Conditions</a></label
+              >
+            </div>
+            <button class="btn" type="submit">Register</button>
+            <p>
+              already have an account?
+              <a class="switch-form" id="switchToLogin"> Sign in</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const modal = document.getElementById("modal");
+      const openModal = document.getElementById("openModal");
+      const closeModal = document.getElementById("closeModal");
+
+      openModal.onclick = () => {
+        modal.style.display = "block";
+        modal.classList.remove("register-active");
+      };
+
+      closeModal.onclick = () => {
+        modal.style.display = "none";
+      };
+
+      document.getElementById("switchToRegister").onclick = () => {
+        modal.classList.add("register-active");
+      };
+
+      document.getElementById("switchToLogin").onclick = () => {
+        modal.classList.remove("register-active");
+      };
+    </script>
+  </body>
+</html>
